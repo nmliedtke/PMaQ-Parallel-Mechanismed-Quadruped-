@@ -1,0 +1,1 @@
+This project was created by Nicoli Liedtke on October 15th, 2018. The project aims to develop a Parallel Mechanismed Quadruped nicknamed PMaQ. Each leg consists of a 2DOF parallel mechanism based off of the Stewart platform. Project designed to run off of an Arduino Mega and use 8 servos as actuators
