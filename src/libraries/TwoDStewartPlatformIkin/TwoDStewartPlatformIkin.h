@@ -14,10 +14,22 @@
 class TwoDStewartPlatformIkin
 {
   public:
-    TwoDStewartPlatformIkin();
-
+    TwoDStewartPlatformIkin(double servoFront, double servoBack, double linkFront, double linkBack, double distBetweenServos, double distBetweenLinks);
+    JointAngles calculateIkin(double x, double y, double phi);//phi is the angle of the foot. phi = 0 when parallel to ground
   private:
+    double _servoFront;
+    double _servoBack;
+    double _linkFront;
+    double _linkBack;
+    double _distBetweenServos;
+    double _distBetweenLinks;
+    double _prevAngle1;
+    double _prevAngle2;
 );
 };
 
+struct JointAngles {
+    double joint1Angle;
+    double joint2Angle;
+};
 #endif

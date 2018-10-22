@@ -13,6 +13,8 @@ LegController::LegController(){
   _frontPos90 = 0.5;
   _backPos0 = 0;
   _backPos90 = 0.5;
+  _frontAngleScale = (_frontPos90 - _frontPos0)/90;
+  _backAngleScale = (_backPos90 - _backPos0)/90;
 }
 
 void LegController::attach(int pinFront, int pinBack){
@@ -20,6 +22,10 @@ void LegController::attach(int pinFront, int pinBack){
   _servoBack.attach(pinBack);
   _pinFront = pinFront;
   _pinBack = pinBack;
+}
+
+void LegController::attachIkin(double servoFront, double servoBack, double linkFront, double linkBack, double distBetweenServos, double distBetweenLinks){
+  _ikin = TwoDStewartPlatformIkin(servoFront, servoBack, linkFront, linkBack, distBetweenServos, distBetweenLinks);
 }
 
 //frontPos and backPos expected to be numbers between 0 and 1
@@ -59,4 +65,15 @@ void LegController::moveTo90(){
 void LegController::setLastXY(double lastX, double lastY){
   _lastX = lastX;
   _lastY = lastY;
+}
+
+void LegController::moveToAngle(double angleFront, double angleBack){
+  double tempFrontPos = angleFront * _frontAngleScale + _frontPos0;
+  double tempBackPos = angleBack * _backAngleScale + _backPos0;
+  move(tempFrontPos, tempBackPos);
+}
+
+void  LegController::moveToXY(double x, double y, double phi) {
+  JointAngles angles = _ikin.calculateIkin(x,y,phi);
+  moveToAngle(angles.joint1Angle, angles.joint2Angle);
 }
