@@ -28,6 +28,9 @@ class LegController
     double _frontPos90;
     double _backPos0;
     double _backPos90;
+    double _lastX;
+    double _lastY;
+    void setLastXY(double lastX, double lastY);
 };
 
 #endif

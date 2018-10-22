@@ -55,3 +55,8 @@ void LegController::moveTo0(){
 void LegController::moveTo90(){
   move(_frontPos90, _backPos90);
 }
+
+void LegController::setLastXY(double lastX, double lastY){
+  _lastX = lastX;
+  _lastY = lastY;
+}
